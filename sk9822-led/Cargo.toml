@@ -1,0 +1,7 @@
+[package]
+name = "sk9822-led"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+spidev = "0.5"

@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    "sk9822-led"
+]
+
+resolver = "2"
