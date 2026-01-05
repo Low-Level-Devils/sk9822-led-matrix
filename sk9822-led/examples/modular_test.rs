@@ -5,9 +5,15 @@ use std::time::Duration;
 const SLEEP_TIME: Duration = Duration::from_millis(35);
 
 fn main() -> std::io::Result<()> {
-    let mut leds = Sk9822LedMatrix::new(1, 15);
+    let mut leds = Sk9822LedMatrix::new(1, 14);
 
     let _ = leds.connect("/dev/spidev0.0");
+
+    for col in 0..14 {
+        leds.update(0, col, |l| l.brightness(0x00).rgb(0, 0, 0));
+    }
+
+    let _ = leds.send_data();
 
     let mut led_1: u8 = 7;
     let mut led_1_prev: u8 = 6;
@@ -23,13 +29,13 @@ fn main() -> std::io::Result<()> {
         leds.update(0, led_1_prev, |l| l.brightness(0x00).rgb(0, 0, 0));
         leds.update(0, led_2_prev, |l| l.brightness(0x00).rgb(0, 0, 0));
 
-        if led_1 == 14 {
+        if led_1 == 13 {
             led_1_increasing = false;
         } else if led_1 == 0 {
             led_1_increasing = true;
         }
 
-        if led_2 == 14 {
+        if led_2 == 13 {
             led_2_increasing = false;
         } else if led_2 == 0 {
             led_2_increasing = true;

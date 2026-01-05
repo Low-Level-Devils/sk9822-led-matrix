@@ -9,7 +9,7 @@ const BLUE_INDEX: usize = 1;
 const GREEN_INDEX: usize = 2;
 const RED_INDEX: usize = 3;
 pub const START_FRAME: [u8; 4] = [0u8; 4];
-pub const END_FRAME: [u8; 4] = [0xFFu8; 4];
+pub const END_FRAME: [u8; 4] = [0x00u8; 4];
 
 #[derive(Clone, Copy)]
 pub struct Sk9822Led {
@@ -114,7 +114,11 @@ impl Sk9822LedMatrix {
             }
         }
 
-        data.extend_from_slice(&END_FRAME);
+        let total_leds = (self.rows as usize) * (self.cols as usize);
+        let end_frame_byetes = (total_leds / 16) + 1;
+        for _ in 0..end_frame_byetes {
+            data.extend_from_slice(&END_FRAME);
+        }
 
         self.spi
             .as_mut()
