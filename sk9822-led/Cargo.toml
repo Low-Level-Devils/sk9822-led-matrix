@@ -5,3 +5,12 @@ edition = "2024"
 
 [dependencies]
 spidev = "0.5"
+image = { version = "0.24", optional = true } 
+
+[features]
+converter = ["image"]
+
+[[bin]]
+name = "gif_convert"
+path = "bin/gif_convert.rs"
+required-features = ["converter"]
