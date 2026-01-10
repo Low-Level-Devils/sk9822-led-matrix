@@ -8,6 +8,9 @@ spidev = "0.5"
 image = { version = "0.24", optional = true } 
 matrix-animation = { path = "../matrix-animation" }
 
+[dev-dependencies]
+matrix-animation-player = { path = "../matrix-animation-player" }
+
 [features]
 converter = ["image"]
 

@@ -144,4 +144,12 @@ impl Sk9822LedMatrix {
             led.update(f);
         }
     }
+
+    pub fn rows(&self) -> u8 {
+        self.rows
+    }
+
+    pub fn cols(&self) -> u8 {
+        self.cols
+    }
 }

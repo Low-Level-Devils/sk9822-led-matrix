@@ -3,10 +3,10 @@
 
 use image::codecs::gif::GifDecoder;
 use image::{AnimationDecoder, DynamicImage, GenericImageView};
+use matrix_animation::Animation;
 use std::fs::{self, File};
 use std::io::{BufWriter, Write};
 use std::path::{Path, PathBuf};
-use matrix_animation::Animation;
 
 const LED_WIDTH: usize = 14;
 const LED_HEIGHT: usize = 14;
@@ -15,8 +15,15 @@ const GIF_DIR: &str = "sk9822-led/gifs/";
 const BIN_DIR: &str = "sk9822-led/animations/";
 const BIN_EXTENSION: &str = "bin";
 
-fn gif_to_animation(gif_path: PathBuf, output_path: PathBuf) -> Result<usize, Box<dyn std::error::Error>> {
-    println!("Converting GIF: {} -> {}", gif_path.display(), output_path.display());
+fn gif_to_animation(
+    gif_path: PathBuf,
+    output_path: PathBuf,
+) -> Result<usize, Box<dyn std::error::Error>> {
+    println!(
+        "Converting GIF: {} -> {}",
+        gif_path.display(),
+        output_path.display()
+    );
     let file = File::open(gif_path)?;
     let decoder = GifDecoder::new(file)?;
     let frames = decoder.into_frames();
@@ -62,7 +69,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     let input = Path::new(GIF_DIR).join(&args[1]);
-    let output = Path::new(BIN_DIR).join(&args[2]).with_extension(BIN_EXTENSION);
+    let output = Path::new(BIN_DIR)
+        .join(&args[2])
+        .with_extension(BIN_EXTENSION);
 
     if !&args[1].ends_with(".gif") {
         eprintln!("Error: Unknown input type. Must be .gif");
@@ -72,7 +81,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let frame_count = gif_to_animation(input, output)?;
     let framerate: u64 = args[3].parse()?;
 
-    let new_animation = Animation::new(&args[1].strip_suffix(".gif").unwrap_or(&args[1]), framerate, frame_count);
+    let new_animation = Animation::new(
+        &args[1].strip_suffix(".gif").unwrap_or(&args[1]),
+        framerate,
+        frame_count,
+    );
     new_animation.save()?;
 
     println!("Done!");

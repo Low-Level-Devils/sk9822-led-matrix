@@ -1,8 +1,9 @@
-use serde::{Deserialize, Serialize};
 use core::str;
-use std::fs;
-use std::path::Path;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use std::fs::{self, File};
+use std::path::Path;
+use std::time::Duration;
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Animation {
@@ -13,6 +14,7 @@ pub struct Animation {
 
 impl Animation {
     const METADATA_PATH_BUILD: &str = "sk9822-led/animations/metadata/animations.json";
+    const ANIMATIONS_PATH: &str = "animations/";
 
     pub fn new(name: &str, fps: u64, frames: usize) -> Self {
         Self {
@@ -37,5 +39,19 @@ impl Animation {
         Ok(())
     }
 
+    pub fn load(&self) -> Result<File, std::io::Error> {
+        File::open(
+            Path::new(Animation::ANIMATIONS_PATH)
+                .join(self.name.clone())
+                .with_extension("bin"),
+        )
+    }
 
+    pub fn get_time_per_frame(&self) -> Duration {
+        Duration::from_millis(1000 / self.fps)
+    }
+
+    pub fn frames(&self) -> usize {
+        self.frames
+    }
 }
