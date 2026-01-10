@@ -1,6 +1,6 @@
 [workspace]
 
-members = ["matrix-animation",
+members = ["matrix-animation", "matrix-animation-player",
     "sk9822-led"
 ]
 

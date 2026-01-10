@@ -11,10 +11,6 @@ pub struct Animation {
     frames: usize,
 }
 
-pub struct AnimationPlayer {
-
-}
-
 impl Animation {
     const METADATA_PATH_BUILD: &str = "sk9822-led/animations/metadata/animations.json";
 
