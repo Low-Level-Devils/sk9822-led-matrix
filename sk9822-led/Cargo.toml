@@ -6,6 +6,7 @@ edition = "2024"
 [dependencies]
 spidev = "0.5"
 image = { version = "0.24", optional = true } 
+matrix-animation = { path = "../matrix-animation" }
 
 [features]
 converter = ["image"]
