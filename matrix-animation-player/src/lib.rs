@@ -36,9 +36,15 @@ impl MatrixAnimationPlayer {
             for _frame in 0..self.animation.frames() {
                 for row in 0..self.matrix.rows() {
                     for col in 0..self.matrix.cols() {
+                        let target_col = if (row % 2) == 0 {
+                            col
+                        } else {
+                            self.matrix.cols() - 1 - col
+                        };
+
                         match file.read_exact(&mut buffer) {
                             Ok(_) => {
-                                self.matrix.update(row, col, |led| {
+                                self.matrix.update(row, target_col, |led| {
                                     led.brightness(buffer[0])
                                         .rgb(buffer[1], buffer[2], buffer[3])
                                 });
