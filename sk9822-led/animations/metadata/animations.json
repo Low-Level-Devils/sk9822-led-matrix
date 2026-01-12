@@ -9,6 +9,16 @@
     "fps": 30,
     "frames": 186
   },
+  "dog": {
+    "name": "dog",
+    "fps": 30,
+    "frames": 8
+  },
+  "rainbow_shift": {
+    "name": "rainbow_shift",
+    "fps": 60,
+    "frames": 625
+  },
   "color_test": {
     "name": "color_test",
     "fps": 1,
@@ -18,15 +28,5 @@
     "name": "rainbow_breathing_shift",
     "fps": 60,
     "frames": 346
-  },
-  "rainbow_shift": {
-    "name": "rainbow_shift",
-    "fps": 30,
-    "frames": 625
-  },
-  "dog": {
-    "name": "dog",
-    "fps": 30,
-    "frames": 8
   }
 }
