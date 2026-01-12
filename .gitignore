@@ -4,3 +4,4 @@ Cargo.lock
 **/*.rs.bk
 /target/flycheck*
 *.bin
+sk9822-led-module/
