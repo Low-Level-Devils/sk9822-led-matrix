@@ -10,6 +10,9 @@ matrix-animation = { path = "../matrix-animation" }
 
 [dev-dependencies]
 matrix-animation-player = { path = "../matrix-animation-player" }
+tokio = { version = "*", features = ["full"] }
+anyhow = "1.0"
+futures = "0.3"
 
 [features]
 converter = ["image"]
