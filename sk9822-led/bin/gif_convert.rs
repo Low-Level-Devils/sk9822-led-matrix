@@ -1,6 +1,3 @@
-//run using
-// cargo run --bin gif_convert --features converter -- color_test.gif color_test 1
-
 use image::codecs::gif::GifDecoder;
 use image::{AnimationDecoder, DynamicImage, GenericImageView};
 use matrix_animation::Animation;

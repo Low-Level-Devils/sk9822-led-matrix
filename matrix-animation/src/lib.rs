@@ -13,7 +13,7 @@ pub struct Animation {
 }
 
 impl Animation {
-    const METADATA_PATH_BUILD: &str = "sk9822-led/animations/metadata/animations.json";
+    const METADATA_PATH_BUILD: &str = "sk9822-led/static/animations.json";
     const ANIMATIONS_PATH: &str = "animations/";
 
     pub fn new(name: &str, fps: u64, frames: usize) -> Self {

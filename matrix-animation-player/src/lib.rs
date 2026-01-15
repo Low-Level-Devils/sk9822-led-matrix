@@ -5,8 +5,8 @@ use std::collections::HashMap;
 use std::io::{Read, Seek, SeekFrom};
 use std::path::Path;
 use std::sync::{Arc, Mutex};
-use tokio::task::JoinHandle;
 use std::thread;
+use tokio::task::JoinHandle;
 
 pub struct MatrixAnimationPlayer {
     matrix: Arc<Mutex<Sk9822LedMatrix>>,
@@ -16,7 +16,7 @@ pub struct MatrixAnimationPlayer {
 }
 
 impl MatrixAnimationPlayer {
-    const METADATA_PATH_RUNTIME: &str = "animations/metadata/animations.json";
+    const METADATA_PATH_RUNTIME: &str = "static/animations.json";
 
     pub fn new(matrix: Sk9822LedMatrix, animation: &str) -> Self {
         Self {
@@ -108,7 +108,10 @@ impl MatrixAnimationPlayer {
         let json_string = std::fs::read_to_string(path).expect("Failed to read animation metadata");
         let animations: HashMap<String, Animation> =
             serde_json::from_str(&json_string).expect("Failed to parse animation metadata");
-        animations.get(animation).expect("Animation not found").clone()
+        animations
+            .get(animation)
+            .expect("Animation not found")
+            .clone()
     }
 
     pub async fn change_animation(&mut self, animation: &str) -> Result<()> {

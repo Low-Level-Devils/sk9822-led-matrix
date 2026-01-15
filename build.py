@@ -102,7 +102,8 @@ def setup_output_dir():
     if output_path.exists():
         shutil.rmtree(output_path)
 
-    output_path = output_path / Path("animations/")
+    output_path_animations = output_path / Path("animations/")
+    output_path_static = output_path / Path("static/")
 
     output_path.mkdir(parents=True, exist_ok=True)
 
@@ -112,9 +113,11 @@ def setup_output_dir():
 
 def copy_files():
     gif_binaries_input_path = Path("sk9822-led/animations")
+    static_input_path = Path("sk9822-led/static")
     examples_binaries_input_path = Path("target/aarch64-unknown-linux-gnu/release/examples/")
     output_path_animations = Path("sk9822-led-module/animations")
     output_path_binaries = Path("sk9822-led-module/")
+    output_path_static = Path("sk9822-led-module/static")
 
     if not gif_binaries_input_path.exists():
         print("Gif Binaries path sk9822-led/animations does not exist")
@@ -132,6 +135,11 @@ def copy_files():
         shutil.copy2(file_path, destination)
 
     print("Binaries copied successfully")
+    print("-" * 50)
+
+    shutil.copytree(static_input_path, output_path_static, dirs_exist_ok=True)
+
+    print("Static files copied successfully")
     print("-" * 50)
 
 if __name__ == "__main__":   
